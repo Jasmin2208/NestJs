@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 
 @Controller('book')
 export class BookController {
@@ -19,9 +19,13 @@ export class BookController {
         return `This action returns a #${params.id} Book`;
     }
 
-    @Put('/update')
-    updateBook(): string {
-        return 'This is for update book'
+    @Put('/update/:id')
+    updateBook(@Param('id') id: string, @Body() updateBookDto: any): any {
+        const data = {
+            id,
+            updateBookDto
+        }
+        return data
     }
 
     @Delete('/delete')
